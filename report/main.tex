@@ -45,7 +45,19 @@ Grégoire Béchade \email{gregoire.bechade@polytechnique.edu} % student 2
 \section{Introduction and contributions}
 The paper we studied aims to introduce a novel method based on clustering to perform anomaly detection in large time series. 
 Anomaly detection can be defined in several manners. 
-It can be interpreted as "outlier detection", where the objective is to detect single points
+It can be interpreted as "outlier detection", where the objective is to detect single anormal points (which can for instance correspond to sensor failures). 
+The paper focuses on the second type of task, which aims to detect anormal subsequences of the time series. 
+In this case, several consequent points behave anormaly (for instance, an anormal heartbeat or an anormal day of electricity consumption).
+Two definitions of anomaly sequence tear apart the community.
+The authors decided to consider that an anomaly sequence is a sequence that can be observed several times in the time-series. 
+The method aims to define the expected behavious of the time series, and defines anomalies as subsequences that are too far from this expected behaviour.
+The real contribution of this new method is not an improvment in terms of accuracy, but in computational time. 
+Indeed, the approximation of the expected behaviour prevents to compute the distances between all pairs of subsequences. \\
+We decided to reproduce the algorithm described in the paper, to study the impact of the variation of some parameters and test it on new data. \\
+We decided to split the work as follows : TODO. As the source code was not available, we reimplemented everything ourselves. 
+Experiments: TODO.
+Improvment of the original method : TODO.
+
 
 
 
