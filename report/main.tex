@@ -43,7 +43,7 @@ Grégoire Béchade \email{gregoire.bechade@polytechnique.edu} % student 2
 % \end{itemize}
 
 \section{Introduction and contributions}
-The paper we studied aims to introduce a novel method based on clustering to perform anomaly detection in large time series. 
+The paper we studied aims to introduce a novel method to perform anomaly detection in large time series, based on the introduction of a "normal behaviour" of the time series.
 Anomaly detection can be defined in several manners. 
 It can be interpreted as "outlier detection", where the objective is to detect single anormal points (which can for instance correspond to sensor failures). 
 The paper focuses on the second type of task, which aims to detect anormal subsequences of the time series. 
@@ -54,7 +54,8 @@ The method aims to define the expected behavious of the time series, and defines
 The real contribution of this new method is not an improvment in terms of accuracy, but in computational time. 
 Indeed, the approximation of the expected behaviour prevents to compute the distances between all pairs of subsequences. \\
 We decided to reproduce the algorithm described in the paper, to study the impact of the variation of some parameters and test it on new data. \\
-We decided to split the work as follows : TODO. As the source code was not available, we reimplemented everything ourselves. 
+We decided to split the work as follows : TODO. 
+As the source code was not available, we reimplemented everything ourselves. 
 Experiments: TODO.
 Improvment of the original method : TODO.
 
@@ -70,6 +71,30 @@ The Introduction section (indicative length : less than 1 page) should detail th
 \end{itemize}
 
 \section{Method}
+
+Classical methods for anormal sequences detection rely on the fact that anormal sequences are considered as unique sequences in the time-series. 
+These methods labels as anomaly the sequences that are far away from every other subsequence of the time series, for a given metric (euclidian, DTW). 
+However, as explained in the article, one can be looking for anomalies that are not unique, for instance a sequence of anormal heartbeats.
+The method proposed introduces the \textbf{normal model} ($N_M$), which is a sequence of fixed length (here $3 \times l $, with $l$ the length of the anomalies we are looking for), that represents the "normal behaviour" of the model. 
+The proposed method to determine the $N_M$ is : 
+\begin{enumerate}
+    \item Extracting subsequences of length $3 \times l$  (randomly or with motif selection)
+    \item Hierarchical clustering of the subsequences.
+    \item Selecting the cluster $c$ in $\mathbb{C}$ (the set of clusters) that maximises the following quantity : $N(c) = \frac{frequency (c)^2 \times coverage (c) }{ \Sigma_{x \in \mathbb{C} } dist(center(c), center(x))}$\\
+    With $frequency(c)$ the number of sequences in the cluster, $coverage(c)$ the time lag between the first and the last sequence in the cluster, and $center(c)$ the barycenter of the cluster.
+    This quantity aims to select the cluster with the most sequences, and that is close to the other clusters. 
+    \item Finally, $N_M$ is defined as the barycenter of the cluster $c$.
+\end{enumerate}
+
+The distance of a subsequence to the normal model is then defined as the minimal (euclidian) distance between a subsequence os size $l$ and all the subsequences in the normal model of size $l$ (as a recall, the normal model is of size $3 \times l$).
+The authors describe several metric to label a subsequence as anormal. 
+Selecting the $k$ subsequences with the biggest minimal distance to the normal model, or selecting the ones that are above a certain threshold can be methods to determine the anomalies.
+
+The key point of the method is that instead of comparing an anomaly to all the subsequences of the time-series and then comapring it to a very large number of identical pattern, the clustring steps enables to drastically reduce the number of comparisons. 
+Indeed, each sequence of size $l$ is compared to $2 \times l $ sequences in the normal model, instead of $T - 2 \times l$ in the whole time series (with the condition of non overlap). 
+
+
+
 
 The Method section (indicative length : 1 to 2 pages) should describe the mathematical aspects of the method in a summarized manner. Only the main steps that are useful for understanding should be highlighted. If relevant, some details on implementation can be provided (but only marginally).
 
