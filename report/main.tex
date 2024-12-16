@@ -1,6 +1,10 @@
 \documentclass[11pt]{article}
 \usepackage{theme}
 \usepackage{shortcuts}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{minted}
+\usepackage{subcaption}
 % Document parameters
 % Document title
 \title{Mini-Project (ML for Time Series) - MVA 2024/2025}
@@ -94,11 +98,53 @@ The key point of the method is that instead of comparing an anomaly to all the s
 Indeed, each sequence of size $l$ is compared to $2 \times l $ sequences in the normal model, instead of $T - 2 \times l$ in the whole time series (with the condition of non overlap). 
 
 
+We decided to implement the algorithm from scratch to try to reproduce the results from the paper. 
 
+We randomly selected TODO INSERT NUMBER OF SEQUENCES subsequences of size TODO INSERT SIZE from the original time-series. 
+A hierarchical clustering was then performed using the scipy.cluster.hierarchy.fcluster function, with the distance criterion. 
+TODO INSERT NUMBER clusters were identified, and the most representative cluster was selected using the criterion described above.
+The centroid of the cluster was then computed, and led to the following normal mode : TODO INSERT FIG. 
+
+
+To evaluate our model, we computed the score of each subsequence of the origin time-series, defined as the minimal distance between this subsequence and each subsequence in the normal model, and selected the TODO INSERT NUMBER most anormal subsequences.
 
 The Method section (indicative length : 1 to 2 pages) should describe the mathematical aspects of the method in a summarized manner. Only the main steps that are useful for understanding should be highlighted. If relevant, some details on implementation can be provided (but only marginally).
 
 \section{Data}
+
+We decided to run the algorithm on the NYC taxis dataset, which represents the number of calls to taxis in New York City every 30 minutes between 01/07/2014 and 30/01/2015, available \href{https://github.com/numenta/NAB/blob/master/data/realKnownCause/nyc_taxi.csv}{here}. 
+This dataset seemed performant because of its big size : 10320 points. 
+Its mean is 15137.57, with a standard deviation of 6931.92. \\
+The figure \ref{fig:taxis} shows a day of the time-series.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{example_day.png}
+    \caption{A day of the NYC taxis dataset}
+    \label{fig:taxis}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{autocorrelation.png}
+        \caption{Autocorrelation plot}
+        \label{fig:autocorrelation}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{histograms.png}
+        \caption{Histogram of values}
+        \label{fig:histograms}
+    \end{subfigure}
+    \caption{Data analysis}
+    \label{fig:data_analysis}
+\end{figure}
+Augmented Dicky-Fuller and KSS tests showed p-values of respectively 2.5e-19 and 0.06, which confirms the stationarity of the time-series. 
+The periodicity of the time-series was confirmed by an autocorrelation plot  (see Fig.\ref{fig:autocorrelation}), with a peak every 48 points, corresponding to 24 hours time-lag. 
+An histogram of the values taken by the time-series shows a bimodal distribution with few outliers, separated by the 14000 value (see Fig.\ref{fig:histograms}). 
+Values below 14000 correspond almost exactly to hours between 00:00 and 07:00, which is coherent with the physical meaning of the time-series (see figure \ref{fig:taxis}).
+
+
 The Data section (indicative length : 1 page) should provide a deep analysis of the data used for experiment. In particular, we are interested here in your capacity to provide relevant and thoughtful feedbacks on the data and to demonstrate that you master some "data diagnosis" tools that have been dealt with in the lectures/tutorials.
 
 \section{Results}

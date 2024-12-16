@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1734186363 "c:/Users/grego/Documents/code/mlts_final/presentation/main.tex" "main.pdf" "main" 1734186366 0
+["pdflatex"] 1734186430 "c:/Users/grego/Documents/code/mlts_final/presentation/main.tex" "main.pdf" "main" 1734186433 0
   "C:/Users/grego/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1734185076 113428 a280e18065651d82029025b185cb382a ""
   "C:/Users/grego/AppData/Local/MiKTeX/fonts/tfm/public/rsfs/rsfs10.tfm" 1728661553 688 37338d6ab346c2f1466b29e195316aa4 ""
   "C:/Users/grego/AppData/Local/MiKTeX/fonts/tfm/public/rsfs/rsfs5.tfm" 1728661555 684 3a51bd4fd9600428d5264cf25f04bb9a ""
@@ -302,12 +302,12 @@
   "C:/Users/grego/AppData/Local/Programs/MiKTeX/tex/latex/translator/translator.sty" 1622471510 8765 56d370785f0143111ff9898b5adfe08e ""
   "C:/Users/grego/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/grego/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
-  "c:/Users/grego/Documents/code/mlts_final/presentation/main.tex" 1734186362 2560 4f78881ed1dd760dff7caac8ba522a08 ""
+  "c:/Users/grego/Documents/code/mlts_final/presentation/main.tex" 1734186429 2561 abb6a13f3436a7b6ef290fbf343645a2 ""
   "heartbeats.png" 1734185656 171657 661e4fd7c8447f00bc3b0d9b0a0a6fcb ""
-  "main.aux" 1734186366 1126 5ff314160784839e872ed689827af02b "pdflatex"
-  "main.nav" 1734186366 571 686a2d273024229235dc0db1f461ba6c "pdflatex"
-  "main.out" 1734186365 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "main.tex" 1734186362 2560 4f78881ed1dd760dff7caac8ba522a08 ""
+  "main.aux" 1734186433 1126 5ff314160784839e872ed689827af02b "pdflatex"
+  "main.nav" 1734186433 571 686a2d273024229235dc0db1f461ba6c "pdflatex"
+  "main.out" 1734186432 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "main.tex" 1734186429 2561 abb6a13f3436a7b6ef290fbf343645a2 ""
   (generated)
   "main.aux"
   "main.log"
