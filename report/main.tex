@@ -5,6 +5,8 @@
 \usepackage{hyperref}
 \usepackage{minted}
 \usepackage{subcaption}
+% \usepackage[backend=biber]{biblatex}
+% \addbibresource{references.bib}
 % Document parameters
 % Document title
 \title{Mini-Project (ML for Time Series) - MVA 2024/2025}
@@ -54,25 +56,25 @@ The paper focuses on the second type of task, which aims to detect anormal subse
 In this case, several consequent points behave anormaly (for instance, an anormal heartbeat or an anormal day of electricity consumption).
 Two definitions of anomaly sequence tear apart the community.
 The authors decided to consider that an anomaly sequence is a sequence that can be observed several times in the time-series. 
-The method aims to define the expected behavious of the time series, and defines anomalies as subsequences that are too far from this expected behaviour.
+The method aims to define the expected behaviour of the time series, and defines anomalies as subsequences that are too far from this expected behaviour.
 The real contribution of this new method is not an improvment in terms of accuracy, but in computational time. 
-Indeed, the approximation of the expected behaviour prevents to compute the distances between all pairs of subsequences. \\
-We decided to reproduce the algorithm described in the paper, to study the impact of the variation of some parameters and test it on new data. \\
-We decided to split the work as follows : TODO. 
-As the source code was not available, we reimplemented everything ourselves. 
-Experiments: TODO.
-Improvment of the original method : TODO.
+Indeed, the approximation of the expected behaviour prevents to compute the distances between all pairs of subsequences. \\[0.5cm]
+We decided to reproduce the algorithm described in the paper, to study the impact of the variation of some parameters and test it on new data. \\[0.5cm]
+We decided to split the work as follows : Grégoire made the data extraction and vizualization and Norma1. Alexis did Norma2 and our personal variation. \\[0.5cm]
+As the source code was not available, we reimplemented everything ourselves. \\[0.5cm]
+Experiments: Several algorithms from the original papers were run, and our own variation using k-means instead of hierarchical clustering was implemented.\\[0.5cm]
+Improvment of the original method : a k-means clustering was tested, leading to significant increase in performances.\\[0.5cm]
 
 
 
 
-The Introduction section (indicative length : less than 1 page) should detail the scientific context of the article you chose, as well as the task that you want to solve (especially if you apply it on novel data). \textbf{The last paragraph of the introduction must contain the following information}:
-\begin{itemize}
-    \item Repartition of work between the two students
-    \item Use of available source code or not, percentage of the source code that has been reused, etc.
-    \item Use of existing experiments or new experiments (e.g. test of the influence of parameter that was not conducted in the original article, application of the method on a novel task/data set etc.)
-    \item Improvement on the original method (e.g. new pre/post processing steps, grid search for optimal parameters etc.)
-\end{itemize}
+% The Introduction section (indicative length : less than 1 page) should detail the scientific context of the article you chose, as well as the task that you want to solve (especially if you apply it on novel data). \textbf{The last paragraph of the introduction must contain the following information}:
+% \begin{itemize}
+%     \item Repartition of work between the two students
+%     \item Use of available source code or not, percentage of the source code that has been reused, etc.
+%     \item Use of existing experiments or new experiments (e.g. test of the influence of parameter that was not conducted in the original article, application of the method on a novel task/data set etc.)
+%     \item Improvement on the original method (e.g. new pre/post processing steps, grid search for optimal parameters etc.)
+% \end{itemize}
 
 \section{Method}
 
@@ -100,19 +102,24 @@ Indeed, each sequence of size $l$ is compared to $2 \times l $ sequences in the 
 
 We decided to implement the algorithm from scratch to try to reproduce the results from the paper. 
 
-We randomly selected TODO INSERT NUMBER OF SEQUENCES subsequences of size TODO INSERT SIZE from the original time-series. 
-A hierarchical clustering was then performed using the scipy.cluster.hierarchy.fcluster function, with the distance criterion. 
-TODO INSERT NUMBER clusters were identified, and the most representative cluster was selected using the criterion described above.
-The centroid of the cluster was then computed, and led to the following normal mode : TODO INSERT FIG. 
+First, we tried to reproduce the algorithm from the paper, with hierarchical clustering and selecting the centroïd of the most representative cluster, as explained in the paper.\\
 
+Then, we tried another algorith from \ref{ref1}, which follows the same method but decides to define as the normal model the average mean of the centroids of each cluster, with the score as weights.\\
 
-To evaluate our model, we computed the score of each subsequence of the origin time-series, defined as the minimal distance between this subsequence and each subsequence in the normal model, and selected the TODO INSERT NUMBER most anormal subsequences.
+Finally, we implemented our own variation, with the use of k-means, which provides less variance in the results. 
+We randomly selected approximately 50 subsequences of size $ 7 \times 48 = 336$ from the original time-series. 
+We decided to have a size of 7 days to catch a "normal week". 
+A k-means clustering was then performed using the scipy.cluster.hierarchy.fcluster function, with the distance criterion. 
+We then computed the normal model as the averaged sum of the centroids of each cluster with respect to the criterion defined above.
 
-The Method section (indicative length : 1 to 2 pages) should describe the mathematical aspects of the method in a summarized manner. Only the main steps that are useful for understanding should be highlighted. If relevant, some details on implementation can be provided (but only marginally).
+To evaluate our model, we computed the score of each subsequence of the origin time-series, defined as the minimal distance between this subsequence and each subsequence in the normal model, and selected the 10 most anormal subsequences.
+
+% The Method section (indicative length : 1 to 2 pages) should describe the mathematical aspects of the method in a summarized manner. Only the main steps that are useful for understanding should be highlighted. If relevant, some details on implementation can be provided (but only marginally).
 
 \section{Data}
 
 We decided to run the algorithm on the NYC taxis dataset, which represents the number of calls to taxis in New York City every 30 minutes between 01/07/2014 and 30/01/2015, available \href{https://github.com/numenta/NAB/blob/master/data/realKnownCause/nyc_taxi.csv}{here}. 
+The dataset has 5 anomalies highlighted, that we aim to detect. 
 This dataset seemed performant because of its big size : 10320 points. 
 Its mean is 15137.57, with a standard deviation of 6931.92. \\
 The figure \ref{fig:taxis} shows a day of the time-series.
@@ -145,9 +152,46 @@ An histogram of the values taken by the time-series shows a bimodal distribution
 Values below 14000 correspond almost exactly to hours between 00:00 and 07:00, which is coherent with the physical meaning of the time-series (see figure \ref{fig:taxis}).
 
 
-The Data section (indicative length : 1 page) should provide a deep analysis of the data used for experiment. In particular, we are interested here in your capacity to provide relevant and thoughtful feedbacks on the data and to demonstrate that you master some "data diagnosis" tools that have been dealt with in the lectures/tutorials.
+% The Data section (indicative length : 1 page) should provide a deep analysis of the data used for experiment. In particular, we are interested here in your capacity to provide relevant and thoughtful feedbacks on the data and to demonstrate that you master some "data diagnosis" tools that have been dealt with in the lectures/tutorials.
 
 \section{Results}
-The Result section (indicative length : 1 to 2 pages) should display numerical simulations on real data. If you re-used some existing implementations, it is expected that this section develops new experiments that were not present in the original article. Results should be discussed not only based on quantative scores but also on qualitative aspects. In particular (especially if your article focuses on black box methods), please provide some feedbacks whether the method was adapted to the data or not and whether the hypothesis behind the approach you used were validated or not.
+The three algorithms described in the methods were run on the taxi dataset. 
+10 anomalies were extracted, and the goal was to detect the 5 known anomalies in the dataset. 
+The 
+TODO add figure of the 3 algos + analyse de leurs performances.
+Some anomalies correspond to aldready detected anomalies in the time-series (Thanksgiving and Christmas leading to a huge increase in the number of calls to join the family at unexpected hours and New-York marathon or a snow storm leading to a decrease in the number of calls). 
+New anomalies were detected. 
+\ref{ref1} also detected these new anomalies, and observed that they corresponded to very rainy days. 
+The method seems relevant, as it enabled to detect new anomalies. 
+% The Result section (indicative length : 1 to 2 pages) should display numerical simulations on real data. If you re-used some existing implementations, it is expected that this section develops new experiments that were not present in the original article. Results should be discussed not only based on quantative scores but also on qualitative aspects. In particular (especially if your article focuses on black box methods), please provide some feedbacks whether the method was adapted to the data or not and whether the hypothesis behind the approach you used were validated or not.
+
+
+% \begin{figure}
+%     \centering
+%     \begin{subfigure}[b]{0.45\textwidth}
+%         \includegraphics[width=\textwidth]{algo1.png}
+%         \caption{Results from algorithm 1}
+%         \label{fig:algo1}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[b]{0.45\textwidth}
+%         \includegraphics[width=\textwidth]{algo2.png}
+%         \caption{Results from algorithm 2}
+%         \label{fig:algo2}
+%     \end{subfigure}
+%     \begin{subfigure}[b]{0.45\textwidth}
+%         \includegraphics[width=\textwidth]{algo3.png}
+%         \caption{result from algorithm 3}
+%         \label{fig:algo3}
+%     \end{subfigure}
+%     \caption{Results of the three algorithms}
+%     \label{fig:results}
+% \end{figure}
+
+
+
+% references
+\section{References}
+\label{ref1} Boniol, P., Linardi, M., Roncallo, F., Palpanas, T., Meftah, M., \& Remy, E. (2021). Unsupervised and scalable subsequence anomaly detection in large data series. The VLDB Journal, 30(6), 909-931.
 
 \end{document}
