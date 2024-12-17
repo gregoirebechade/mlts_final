@@ -53,7 +53,7 @@ The paper we studied aims to introduce a novel method to perform anomaly detecti
 Anomaly detection can be defined in several manners. 
 It can be interpreted as "outlier detection", where the objective is to detect single anormal points (which can for instance correspond to sensor failures). 
 The paper focuses on the second type of task, which aims to detect anormal subsequences of the time series. 
-In this case, several consequent points behave anormaly (for instance, an anormal heartbeat or an anormal day of electricity consumption).
+In this case, several consecutive points behave anormaly (for instance, an anormal heartbeat or an anormal day of electricity consumption).
 The authors decided to consider that an anomaly sequence is a sequence that can be observed several times in the time-series, in opposition to another definition that would consider an anomaly as a unique sequence.
 The method aims to define the expected behaviour of the time series, and defines anomalies as subsequences that are too far from this expected behaviour.
 The real contribution of this new method is not an improvment in terms of accuracy, but in computational time. 
@@ -62,7 +62,7 @@ We decided to reproduce the algorithm described in the paper, to implement some 
 We decided to split the work as follows : Grégoire made the data extraction and vizualization and Norma1. Alexis did Norma2 and our personal variation. \\[0.5cm]
 As the source code was not available, we reimplemented everything ourselves. \\[0.5cm]
 Experiments: Several algorithms from the original papers were run, and our own variation using k-means instead of hierarchical clustering was implemented. 
-A new method to sample the subsequence was also tested. \\[0.5cm]
+A new method to sample the subsequence was also tested and significantly improves the results. \\[0.5cm]
 
 
 
@@ -101,23 +101,32 @@ Indeed, each sequence of size $l$ is compared to $2 \times l $ sequences in the 
 
 We decided to implement the algorithm from scratch to try to reproduce the results from the paper. 
 
+A first implementation was tested, trying to reproduce exactly the algorithm from the paper (Norma1 without seasonal sampling). \\[0.5cm]
+
+\textbf{Seasonal sampling : }\\
+We noticed that the sampling was not optimal, as sequences beginning at different hours were compared with an euclidian distance, which did not seem relevant.
+For the other algorithms described above, we decided to perform a samplig which took into account the seasonality of the time series as follows : 
 We randomly selected approximately 50 subsequences of size $ 7 \times 48 = 336$ from the original time-series. 
-The sampling had to be carefully. 
 Indeed, as the final step of the clustering consists in determining a barycenter, and as there is a strong seasonality in the time series, we don't want to sum a subsequence beginning at 7:00 and a subsequence beginning at 23:00, as it would probably converge toward a flat distribution. 
 The sampling was then performed on days, in order to have subsequences beginning at the same time. 
 
 We decided to fix a size of 7 days for the normal model to catch a "normal week". 
 
-First, we tried to reproduce the algorithm from the paper, with hierarchical clustering and selecting the centroïd of the most representative cluster as the normal model, as explained above.\\
+Three algorithms were tested with this seasonal sampling :
 
-Then, we tried another algorith from \ref{ref1}, which follows the same method but decides to define as the normal model the average mean of the centroids of each cluster, with the score of each cluster as weights. 
-This approach aims at better catching the normal behaviour of the time series. 
-Indeed, if there is two normal patterns with a very different shape in the time series, the first approach would label as anomaly every pattern of the second size, while the second approach integrates this information. \\
+\begin{enumerate}
+    \item First, we tried to reproduce the algorithm from the paper, with hierarchical clustering and selecting the centroïd of the most representative cluster as the normal model, as explained above (Norma1 with seasonal sampling).\\
+    \item Then, we tried another algorith from \ref{ref1}, which follows the same method but decides to define as the normal model the average mean of the centroids of each cluster, with the score of each cluster as weights (Norma2 with seasonal sampling). 
+        This approach aims at better catching the normal behaviour of the time series. 
+        Indeed, if there is two normal patterns with a very different shape in the time series, the first approach would label as anomaly every pattern of the second size, while the second approach integrates this information. \\
+    \item   Finally, we implemented our own variation, with the use of k-means instead of hierarchical clustering, which provides less variance in the results (K-means vriation with seasonal sampling). 
+            A k-means clustering was then performed using the scipy.cluster.hierarchy.fcluster function, with the distance criterion. 
+            We then computed the normal model as the averaged sum of the centroids of each cluster with respect to the criterion defined above.
 
-Finally, we implemented our own variation, with the use of k-means instead of hierarchical clustering, which provides less variance in the results. 
+\end{enumerate}
 
-A k-means clustering was then performed using the scipy.cluster.hierarchy.fcluster function, with the distance criterion. 
-We then computed the normal model as the averaged sum of the centroids of each cluster with respect to the criterion defined above.
+
+
 
 To evaluate our model, we computed the score of each subsequence of the origin time-series, defined as the minimal distance between this subsequence and each subsequence in the normal model, and selected the 10 most anormal subsequences.
 
@@ -164,35 +173,43 @@ Values below 14000 correspond almost exactly to hours between 00:00 and 07:00, w
 \section{Results}
 The three algorithms described in the methods were run on the taxi dataset. 
 10 anomalies were extracted, and the goal was to detect the 5 known anomalies in the dataset. 
-The two first algorithms returns roughly the same results, and identify correctly the 5 anomalies which correspond to aldready detected anomalies in the time-series (Thanksgiving and Christmas leading to a huge increase in the number of calls to join the family at unexpected hours and New-York marathon or a snow storm leading to a decrease in the number of calls). 
+First, one can notice that Norma1 has better results with seasonal sampling rather than random sampling, as can be noticed on the score curve, whose variance diminishes with seasonal sampling. 
+Norma 1 and Norma 2 with seasonal sampling returns roughly the same results, and identify correctly the 5 anomalies which correspond to aldready detected anomalies in the time-series (Thanksgiving and Christmas leading to a huge increase in the number of calls to join the family at unexpected hours and New-York marathon or a snow storm leading to a decrease in the number of calls). 
 New anomalies were also detected by those two algorithms.
 \ref{ref1} also pointed out these new anomalies, and observed that they corresponded to very rainy days. 
 The method seems relevant, as it enabled to detect new anomalies. 
-One can also notice that the anomaly score is less regular in the first algorithm, which is a good thing, as sundays should not be more anormal than mondays. 
-The third algorithm does not manage to catch the expected anomalies. 
-To conclude, the first algorithm outperforms the two following ones. 
+One can also notice that the anomaly score is less regular in the Norma1, which is a good thing, as sundays should not be more anormal than mondays. 
+The k-means variation algorithm does not manage to catch the expected anomalies. 
+To conclude, Norma1 with seasonal variations algorithm outperforms the other algorithms tested. 
 % The Result section (indicative length : 1 to 2 pages) should display numerical simulations on real data. If you re-used some existing implementations, it is expected that this section develops new experiments that were not present in the original article. Results should be discussed not only based on quantative scores but also on qualitative aspects. In particular (especially if your article focuses on black box methods), please provide some feedbacks whether the method was adapted to the data or not and whether the hypothesis behind the approach you used were validated or not.
 
 
 \begin{figure}[h]
     \centering
-    \begin{subfigure}[b]{0.6\textwidth}
+    \begin{subfigure}[b]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{algo0.jpg}
+        \caption{Results from Norma1 with random sampling}
+        \label{fig:algo0}
+    \end{subfigure}
+    \hfill
+
+    \begin{subfigure}[b]{0.5\textwidth}
         \includegraphics[width=\textwidth]{algo1.png}
-        \caption{Results from algorithm 1}
+        \caption{Results from Norma1 with seasonal sampling}
         \label{fig:algo1}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.6\textwidth}
+    \begin{subfigure}[b]{0.5\textwidth}
         \includegraphics[width=\textwidth]{algo2.png}
-        \caption{Results from algorithm 2}
+        \caption{Results from Norma2 with seasonal sampling}
         \label{fig:algo2}
     \end{subfigure}
-    \begin{subfigure}[b]{0.6\textwidth}
+    \begin{subfigure}[b]{0.5\textwidth}
         \includegraphics[width=\textwidth]{algo3.png}
-        \caption{result from algorithm 3}
+        \caption{result from k-means variation with seasonal sampling}
         \label{fig:algo3}
     \end{subfigure}
-    \caption{Results of the three algorithms}
+    \caption{Results of the different algorithms}
     \label{fig:results}
 \end{figure}
 
