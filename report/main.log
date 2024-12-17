@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.12) (preloaded format=pdflatex 2024.1.7)  17 DEC 2024 11:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.12) (preloaded format=pdflatex 2024.1.7)  17 DEC 2024 12:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -813,7 +813,14 @@ Package translations Info: No language package found. I am going to use `english
 LaTeX Font Info:    Trying to load font information for T1+ppl on input line 18.
  (C:\Users\grego\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1ppl.fd
 File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
-) (main.aux (main.xsim))
+) (main.aux (main.xsim)
+
+LaTeX Warning: Label `fig:algo3' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:algo3' multiply defined.
+
+)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
@@ -1008,53 +1015,71 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <algo0.jpg, id=68, 1193.45876pt x 792.9625pt>
 File: algo0.jpg Graphic file (type jpg)
 <use algo0.jpg>
-Package pdftex.def Info: algo0.jpg  used on input line 190.
+Package pdftex.def Info: algo0.jpg  used on input line 189.
 (pdftex.def)             Requested size: 1193.45584pt x 792.96056pt.
+
+Underfull \hbox (badness 1412) in paragraph at lines 190--190
+[]\T1/ppl/m/n/10 (a) |Re-sults from Norma1 with ran-dom
+ []
+
 <algo1.png, id=69, 859.2903pt x 570.933pt>
 File: algo1.png Graphic file (type png)
 <use algo1.png>
-Package pdftex.def Info: algo1.png  used on input line 197.
+Package pdftex.def Info: algo1.png  used on input line 195.
 (pdftex.def)             Requested size: 859.2882pt x 570.9316pt.
 <algo2.png, id=70, 859.2903pt x 570.933pt>
 File: algo2.png Graphic file (type png)
 <use algo2.png>
-Package pdftex.def Info: algo2.png  used on input line 203.
+Package pdftex.def Info: algo2.png  used on input line 201.
 (pdftex.def)             Requested size: 859.2882pt x 570.9316pt.
+
+Underfull \hbox (badness 1048) in paragraph at lines 202--202
+[]\T1/ppl/m/n/10 (c) |Re-sults from Norma2 with sea-sonal
+ []
+
 <algo3.png, id=71, 859.2903pt x 570.933pt>
 File: algo3.png Graphic file (type png)
 <use algo3.png>
-Package pdftex.def Info: algo3.png  used on input line 208.
+Package pdftex.def Info: algo3.png  used on input line 207.
+(pdftex.def)             Requested size: 859.2882pt x 570.9316pt.
+<algo4.png, id=72, 859.2903pt x 570.933pt>
+File: algo4.png Graphic file (type png)
+<use algo4.png>
+Package pdftex.def Info: algo4.png  used on input line 213.
 (pdftex.def)             Requested size: 859.2882pt x 570.9316pt.
 
-
-LaTeX Warning: Float too large for page by 84.43181pt on input line 214.
+LaTeX Warning: Float too large for page by 151.42043pt on input line 219.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[4 <./autocorrelation.png> <./histograms.png>] [5 <./algo0.jpg> <./algo1.png> <./algo2.png> <./algo3.png>]
-runsystem(latexminted cleantemp  --timestamp 20241217115455 FAD58DE7366495DB4650CFEFAC2FCD61)...disabled (restricted).
+[4 <./autocorrelation.png> <./histograms.png>] [5 <./algo0.jpg> <./algo1.png> <./algo2.png> <./algo3.png> <./algo4.png>]
+runsystem(latexminted cleantemp  --timestamp 20241217120906 FAD58DE7366495DB4650CFEFAC2FCD61)...disabled (restricted).
 
  (main.aux (main.xsim))
  ***********
 LaTeX2e <2023-11-01>
 L3 programming layer <2023-12-11>
  ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D12E1F58FAAE022284EB5EA3AF919017;506.
  ) 
 Here is how much of TeX's memory you used:
- 33407 strings out of 474495
- 683167 string characters out of 5743936
+ 33414 strings out of 474495
+ 683278 string characters out of 5743936
  1937460 words of memory out of 5000000
- 55084 multiletter control sequences out of 15000+600000
+ 55091 multiletter control sequences out of 15000+600000
  595210 words of font info for 131 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  116i,8n,121p,645b,606s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/grego/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/grego/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/grego/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmbb.pfb><C:/Users/grego/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmr.pfb><C:/Users/grego/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/grego/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/grego/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (5 pages, 854949 bytes).
+Output written on main.pdf (5 pages, 1055810 bytes).
 PDF statistics:
- 124 PDF objects out of 1000 (max. 8388607)
+ 126 PDF objects out of 1000 (max. 8388607)
  21 named destinations out of 1000 (max. 500000)
- 88 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 93 words of extra memory for PDF output out of 10000 (max. 10000000)
 

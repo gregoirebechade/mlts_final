@@ -101,7 +101,7 @@ Indeed, each sequence of size $l$ is compared to $2 \times l $ sequences in the 
 
 We decided to implement the algorithm from scratch to try to reproduce the results from the paper. 
 
-A first implementation was tested, trying to reproduce exactly the algorithm from the paper (Norma1 without seasonal sampling). \\[0.5cm]
+A first implementation was tested, trying to reproduce exactly the algorithm from the paper (\textbf{Norma1 without seasonal sampling}). \\[0.5cm]
 
 \textbf{Seasonal sampling : }\\
 We noticed that the sampling was not optimal, as sequences beginning at different hours were compared with an euclidian distance, which did not seem relevant.
@@ -115,13 +115,13 @@ We decided to fix a size of 7 days for the normal model to catch a "normal week"
 Three algorithms were tested with this seasonal sampling :
 
 \begin{enumerate}
-    \item First, we tried to reproduce the algorithm from the paper, with hierarchical clustering and selecting the centroïd of the most representative cluster as the normal model, as explained above (Norma1 with seasonal sampling).\\
-    \item Then, we tried another algorith from \ref{ref1}, which follows the same method but decides to define as the normal model the average mean of the centroids of each cluster, with the score of each cluster as weights (Norma2 with seasonal sampling). 
+    \item First, we tried to reproduce the algorithm from the paper, with hierarchical clustering and selecting the centroïd of the most representative cluster as the normal model, as explained above (\textbf{Norma1 with seasonal sampling}).\\
+    \item Then, we tried another algorith from \ref{ref1}, which follows the same method but decides to define as the normal model the average mean of the centroids of each cluster, with the score of each cluster as weights (\textbf{Norma2 with seasonal sampling}). 
         This approach aims at better catching the normal behaviour of the time series. 
         Indeed, if there is two normal patterns with a very different shape in the time series, the first approach would label as anomaly every pattern of the second size, while the second approach integrates this information. \\
-    \item   Finally, we implemented our own variation, with the use of k-means instead of hierarchical clustering, which provides less variance in the results (K-means vriation with seasonal sampling). 
-            A k-means clustering was then performed using the scipy.cluster.hierarchy.fcluster function, with the distance criterion. 
-            We then computed the normal model as the averaged sum of the centroids of each cluster with respect to the criterion defined above.
+    \item   Finally, we implemented our own variations, with the use of k-means instead of hierarchical clustering. 
+            The first variation gets the centroid of the most representative cluster as the normal model (\textbf{K-means variation 1 with seasonal sampling}), as it is done in Norma1. 
+            The second variation defines the normal model as the averaged sum of the centroids of each cluster with respect to the criterion defined above (\textbf{K-means variation 2 with seasonal sampling}), as it is done in Norma2. 
 
 \end{enumerate}
 
@@ -179,34 +179,39 @@ New anomalies were also detected by those two algorithms.
 \ref{ref1} also pointed out these new anomalies, and observed that they corresponded to very rainy days. 
 The method seems relevant, as it enabled to detect new anomalies. 
 One can also notice that the anomaly score is less regular in the Norma1, which is a good thing, as sundays should not be more anormal than mondays. 
-The k-means variation algorithm does not manage to catch the expected anomalies. 
+The k-means variations algorithms do not manage to catch the expected anomalies. 
 To conclude, Norma1 with seasonal variations algorithm outperforms the other algorithms tested. 
 % The Result section (indicative length : 1 to 2 pages) should display numerical simulations on real data. If you re-used some existing implementations, it is expected that this section develops new experiments that were not present in the original article. Results should be discussed not only based on quantative scores but also on qualitative aspects. In particular (especially if your article focuses on black box methods), please provide some feedbacks whether the method was adapted to the data or not and whether the hypothesis behind the approach you used were validated or not.
 
-
 \begin{figure}[h]
     \centering
-    \begin{subfigure}[b]{0.5\textwidth}
+    \begin{subfigure}[b]{0.4\textwidth}
         \includegraphics[width=\textwidth]{algo0.jpg}
         \caption{Results from Norma1 with random sampling}
         \label{fig:algo0}
     \end{subfigure}
-    \hfill
 
-    \begin{subfigure}[b]{0.5\textwidth}
+    \begin{subfigure}[b]{0.4\textwidth}
         \includegraphics[width=\textwidth]{algo1.png}
         \caption{Results from Norma1 with seasonal sampling}
         \label{fig:algo1}
     \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.5\textwidth}
+
+    \begin{subfigure}[b]{0.4\textwidth}
         \includegraphics[width=\textwidth]{algo2.png}
         \caption{Results from Norma2 with seasonal sampling}
         \label{fig:algo2}
     \end{subfigure}
-    \begin{subfigure}[b]{0.5\textwidth}
+
+    \begin{subfigure}[b]{0.4\textwidth}
         \includegraphics[width=\textwidth]{algo3.png}
-        \caption{result from k-means variation with seasonal sampling}
+        \caption{Results from k-means variation 1 with seasonal sampling}
+        \label{fig:algo3}
+    \end{subfigure}
+
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{algo4.png}
+        \caption{Results from k-means variation 2 with seasonal sampling}
         \label{fig:algo3}
     \end{subfigure}
     \caption{Results of the different algorithms}

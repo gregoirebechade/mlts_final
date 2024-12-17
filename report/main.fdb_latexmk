@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1734432894 "c:/Users/grego/Documents/code/mlts_final/report/main.tex" "main.pdf" "main" 1734432898 0
+["pdflatex"] 1734433745 "c:/Users/grego/Documents/code/mlts_final/report/main.tex" "main.pdf" "main" 1734433750 0
   "C:/Users/grego/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1734185076 113428 a280e18065651d82029025b185cb382a ""
   "C:/Users/grego/AppData/Local/MiKTeX/fonts/tfm/public/rsfs/rsfs10.tfm" 1728661553 688 37338d6ab346c2f1466b29e195316aa4 ""
   "C:/Users/grego/AppData/Local/MiKTeX/fonts/tfm/public/rsfs/rsfs5.tfm" 1728661555 684 3a51bd4fd9600428d5264cf25f04bb9a ""
@@ -231,14 +231,15 @@
   "algo1.png" 1734426532 189559 db63be72e154c7c37a0c69183ad5d9f0 ""
   "algo2.png" 1734426548 190153 732a0b778a48284ca18197466b1920d8 ""
   "algo3.png" 1734426558 209571 5f6542aa9e7965bed56d17db093ac2ae ""
+  "algo4.png" 1734433290 210612 79318f89ca11f4ae045d508f2e2a983b ""
   "autocorrelation.png" 1734358389 25564 be85f7ba98de86bb2ed438e9968cb8cc ""
-  "c:/Users/grego/Documents/code/mlts_final/report/main.tex" 1734432893 16560 08646976f247bace2a74d8e8c45219ac ""
+  "c:/Users/grego/Documents/code/mlts_final/report/main.tex" 1734433744 16841 62b85cc93bc6da2a8c6d778ee5014d9e ""
   "example_day.png" 1734358414 46105 7cf8890d00d43266cca257ad880702e8 ""
   "histograms.png" 1734358402 16879 c4a57fe04e4926783dc9532598ed3a2b ""
-  "main.aux" 1734432898 2740 01752d70733ad5c65f021c811e68b3d3 "pdflatex"
-  "main.out" 1734432898 506 d12e1f58faae022284eb5ea3af919017 "pdflatex"
-  "main.tex" 1734432893 16560 08646976f247bace2a74d8e8c45219ac ""
-  "main.xsim" 1734432897 856 fbe1a71e2ca9b345b801697276de66fc "pdflatex"
+  "main.aux" 1734433750 2963 9f25d02ede47b90aa024068270e0b41c "pdflatex"
+  "main.out" 1734433750 506 d12e1f58faae022284eb5ea3af919017 "pdflatex"
+  "main.tex" 1734433744 16841 62b85cc93bc6da2a8c6d778ee5014d9e ""
+  "main.xsim" 1734433748 856 fbe1a71e2ca9b345b801697276de66fc "pdflatex"
   "shortcuts.sty" 1733932405 4046 2e906de329274feaeea188a83de6b5e2 ""
   "theme.sty" 1733932407 18971 ec420909447e9809c81dd3dde09fd973 ""
   (generated)
