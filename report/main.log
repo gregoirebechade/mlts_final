@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.12) (preloaded format=pdflatex 2024.1.7)  17 DEC 2024 12:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.12) (preloaded format=pdflatex 2024.1.7)  17 DEC 2024 12:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1017,11 +1017,6 @@ File: algo0.jpg Graphic file (type jpg)
 <use algo0.jpg>
 Package pdftex.def Info: algo0.jpg  used on input line 189.
 (pdftex.def)             Requested size: 1193.45584pt x 792.96056pt.
-
-Underfull \hbox (badness 1412) in paragraph at lines 190--190
-[]\T1/ppl/m/n/10 (a) |Re-sults from Norma1 with ran-dom
- []
-
 <algo1.png, id=69, 859.2903pt x 570.933pt>
 File: algo1.png Graphic file (type png)
 <use algo1.png>
@@ -1032,11 +1027,6 @@ File: algo2.png Graphic file (type png)
 <use algo2.png>
 Package pdftex.def Info: algo2.png  used on input line 201.
 (pdftex.def)             Requested size: 859.2882pt x 570.9316pt.
-
-Underfull \hbox (badness 1048) in paragraph at lines 202--202
-[]\T1/ppl/m/n/10 (c) |Re-sults from Norma2 with sea-sonal
- []
-
 <algo3.png, id=71, 859.2903pt x 570.933pt>
 File: algo3.png Graphic file (type png)
 <use algo3.png>
@@ -1048,13 +1038,14 @@ File: algo4.png Graphic file (type png)
 Package pdftex.def Info: algo4.png  used on input line 213.
 (pdftex.def)             Requested size: 859.2882pt x 570.9316pt.
 
-LaTeX Warning: Float too large for page by 151.42043pt on input line 219.
+
+LaTeX Warning: Float too large for page by 73.42065pt on input line 219.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [4 <./autocorrelation.png> <./histograms.png>] [5 <./algo0.jpg> <./algo1.png> <./algo2.png> <./algo3.png> <./algo4.png>]
-runsystem(latexminted cleantemp  --timestamp 20241217120906 FAD58DE7366495DB4650CFEFAC2FCD61)...disabled (restricted).
+runsystem(latexminted cleantemp  --timestamp 20241217121208 FAD58DE7366495DB4650CFEFAC2FCD61)...disabled (restricted).
 
  (main.aux (main.xsim))
  ***********
@@ -1077,7 +1068,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  116i,8n,121p,645b,606s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/grego/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/grego/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/grego/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmbb.pfb><C:/Users/grego/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmr.pfb><C:/Users/grego/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/grego/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/grego/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (5 pages, 1055810 bytes).
+Output written on main.pdf (5 pages, 1055809 bytes).
 PDF statistics:
  126 PDF objects out of 1000 (max. 8388607)
  21 named destinations out of 1000 (max. 500000)
